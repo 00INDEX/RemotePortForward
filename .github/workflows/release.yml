@@ -77,7 +77,7 @@ jobs:
       - name: Check and package
         run: npm run package:registry -- --publisher 00index
       - name: Verify release packages
-        run: node scripts/publish.mjs --check
+        run: node scripts/publish.mjs --check --preflight
       - name: Publish and verify registry downloads
         if: github.event_name == 'push' || inputs.publish == true
         env:

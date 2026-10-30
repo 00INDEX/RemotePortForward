@@ -11,6 +11,7 @@ import yauzl from 'yauzl';
 const { values } = parseArgs({ options: {
   registry: { type: 'string', default: 'all' },
   check: { type: 'boolean', default: false },
+  preflight: { type: 'boolean', default: false },
   'verify-only': { type: 'boolean', default: false },
 } });
 if (!['all', 'openvsx', 'marketplace'].includes(values.registry)) throw new Error('Unknown registry.');
@@ -73,6 +74,7 @@ async function publishedDownload(registry, item) {
   });
   if (!response) throw new Error('Marketplace gallery API is unavailable.');
   const result = await response.json();
+  if (result.errorCode !== undefined || !Array.isArray(result.results)) throw new Error('Marketplace returned an invalid gallery response.');
   const extension = result.results?.[0]?.extensions?.find(extension => `${extension.publisher.publisherName}.${extension.extensionName}`.toLowerCase() === item.id);
   const version = extension?.versions?.find(version => version.version === root.version);
   return version?.files?.find(file => file.assetType === 'Microsoft.VisualStudio.Services.VSIXPackage')?.source;
@@ -142,7 +144,14 @@ for (const kind of ['local', 'remote']) {
   process.stdout.write(`Verified ${name}: ${createHash('sha256').update(bytes).digest('hex')}\n`);
 }
 
-if (!values.check) {
+if (values.preflight) {
+  for (const registry of values.registry === 'all' ? ['openvsx', 'marketplace'] : [values.registry]) {
+    const url = await publishedDownload(registry, items[0]);
+    process.stdout.write(`${registry} API is reachable; companion version ${url ? 'is available' : 'has not been published'}.\n`);
+  }
+}
+
+if (!values.check && !values.preflight) {
   for (const registry of values.registry === 'all' ? ['openvsx', 'marketplace'] : [values.registry]) {
     for (const item of items) {
       if (await verifyPublished(registry, item)) {
