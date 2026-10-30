@@ -8,7 +8,7 @@ export default [
   {
     files: ['**/*.mjs'],
     languageOptions: {
-      globals: { process: 'readonly' },
+      globals: { process: 'readonly', fetch: 'readonly', AbortSignal: 'readonly' },
     },
   },
 ];

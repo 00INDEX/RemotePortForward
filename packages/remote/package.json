@@ -3,7 +3,7 @@
   "displayName": "Remote Ports",
   "description": "Expose TCP services from your computer or LAN on remote loopback ports.",
   "version": "0.1.0",
-  "publisher": "local-dev",
+  "publisher": "00index",
   "license": "MIT",
   "type": "module",
   "engines": {
@@ -18,7 +18,7 @@
   "api": "none",
   "main": "./dist/extension.cjs",
   "extensionPack": [
-    "local-dev.remote-port-forward-ui"
+    "00index.remote-port-forward-ui"
   ],
   "activationEvents": [
     "onCommand:_remotePortForward.prepare",

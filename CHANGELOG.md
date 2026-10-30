@@ -8,6 +8,7 @@
 - Display local listener process names and process IDs.
 - Add session authentication, multiplexed streams, per-stream flow control, and TCP half-close handling.
 - Add registry distribution through a main extension and a local companion extension pack.
+- Add tag-triggered GitHub Actions publishing to Open VSX and the Visual Studio Marketplace, with download verification.
 
 ## 0.0.1
 

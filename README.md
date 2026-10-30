@@ -22,7 +22,7 @@ Requires desktop VS Code 1.95 or later, Remote-SSH, and a trusted remote workspa
 
 ### VSIX installation
 
-Public registry releases are not yet available. Build the packages from source with Node.js 22.13 or later:
+For offline installation, build the packages from source with Node.js 22.13 or later:
 
 ```sh
 npm ci
@@ -40,7 +40,9 @@ The packages and their SHA-256 checksums are written to `artifacts/`.
 
 ### Registry installation
 
-The registry distribution uses an extension pack: install **Remote Ports** in the SSH workspace, and the IDE installs **Remote Ports Companion** locally. Both components must be available in the registry used by the IDE. This installation path is configured but has not yet been validated against a published release.
+Install **Remote Ports** from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=00index.remote-port-forward) or [Open VSX](https://open-vsx.org/extension/00index/remote-port-forward) while connected to the SSH workspace. The extension pack installs **Remote Ports Companion** locally. Both components must be available in the registry used by the IDE.
+
+Remove earlier `local-dev` packages before installing the registry distribution to avoid duplicate command registrations.
 
 ## Architecture
 

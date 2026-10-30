@@ -3,7 +3,7 @@
   "displayName": "Remote Ports Companion",
   "description": "Local companion for Remote Ports. Included automatically when installing Remote Ports from the registry.",
   "version": "0.1.0",
-  "publisher": "local-dev",
+  "publisher": "00index",
   "license": "MIT",
   "type": "module",
   "engines": {
