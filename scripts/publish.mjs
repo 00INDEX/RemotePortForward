@@ -92,6 +92,9 @@ async function verifyDownload(url, item) {
     chunks.push(chunk);
   }
   const remote = await packageContents(Buffer.concat(chunks));
+  const expectedPaths = [...item.files.keys()].filter(path => path.startsWith('extension/')).sort();
+  const actualPaths = [...remote.keys()].filter(path => path.startsWith('extension/')).sort();
+  if (JSON.stringify(actualPaths) !== JSON.stringify(expectedPaths)) throw new Error(`Published file list differs for ${item.id}.`);
   for (const [path, expected] of item.files) {
     if (!path.startsWith('extension/')) continue;
     const actual = remote.get(path);
