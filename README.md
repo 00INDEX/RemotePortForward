@@ -1,5 +1,10 @@
 # Remote Ports
 
+[![Release](https://img.shields.io/github/actions/workflow/status/00INDEX/RemotePortForward/release.yml?event=push&style=flat-square&logo=github&logoColor=white&label=Release&labelColor=24292f)](https://github.com/00INDEX/RemotePortForward/actions/workflows/release.yml)
+[![Visual Studio Marketplace](https://img.shields.io/badge/VS%20Code%20Marketplace-Install-007acc?style=flat-square&labelColor=24292f)](https://marketplace.visualstudio.com/items?itemName=00index.remote-port-forward)
+[![Open VSX](https://img.shields.io/open-vsx/v/00index/remote-port-forward?style=flat-square&label=Open%20VSX&color=a855f7&labelColor=24292f)](https://open-vsx.org/extension/00index/remote-port-forward)
+[![License](https://img.shields.io/github/license/00INDEX/RemotePortForward?style=flat-square&label=License&color=14b8a6&labelColor=24292f)](LICENSE)
+
 Remote Ports makes TCP services on your computer or local network accessible from a Remote-SSH workspace. A remote application connects to a loopback port on the SSH host, and the extension forwards that connection to the configured target address.
 
 For example, a service at `192.168.1.20:8080` can be accessed from the remote workspace at `127.0.0.1:18080`.
