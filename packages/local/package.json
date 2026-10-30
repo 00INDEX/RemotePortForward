@@ -1,0 +1,97 @@
+{
+  "name": "remote-port-forward-ui",
+  "displayName": "Remote Ports Companion",
+  "description": "Local companion for Remote Ports. Included automatically when installing Remote Ports from the registry.",
+  "version": "0.1.0",
+  "publisher": "local-dev",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "api": "none",
+  "main": "./dist/extension.cjs",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    },
+    "virtualWorkspaces": false
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "remotePortForward.add",
+        "title": "Forward an Address",
+        "category": "Remote Ports",
+        "icon": "$(add)"
+      },
+      {
+        "command": "remotePortForward.stopAll",
+        "title": "Stop All Forwarding",
+        "category": "Remote Ports",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "remotePortForward.logs",
+        "title": "Show Log",
+        "category": "Remote Ports",
+        "icon": "$(output)"
+      }
+    ],
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "remotePorts",
+          "title": "Remote Ports",
+          "icon": "media/ports.svg"
+        }
+      ]
+    },
+    "views": {
+      "remotePorts": [
+        {
+          "id": "remotePortForward.ports",
+          "name": "Remote Ports",
+          "type": "webview"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "remotePortForward.add",
+          "when": "view == remotePortForward.ports",
+          "group": "navigation@1"
+        },
+        {
+          "command": "remotePortForward.stopAll",
+          "when": "view == remotePortForward.ports",
+          "group": "navigation@2"
+        },
+        {
+          "command": "remotePortForward.logs",
+          "when": "view == remotePortForward.ports",
+          "group": "navigation@3"
+        }
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/00INDEX/RemotePortForward.git",
+    "directory": "packages/local"
+  },
+  "homepage": "https://github.com/00INDEX/RemotePortForward#readme",
+  "bugs": {
+    "url": "https://github.com/00INDEX/RemotePortForward/issues"
+  }
+}

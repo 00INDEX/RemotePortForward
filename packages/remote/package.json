@@ -1,0 +1,42 @@
+{
+  "name": "remote-port-forward",
+  "displayName": "Remote Ports",
+  "description": "Expose TCP services from your computer or LAN on remote loopback ports.",
+  "version": "0.1.0",
+  "publisher": "local-dev",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "api": "none",
+  "main": "./dist/extension.cjs",
+  "extensionPack": [
+    "local-dev.remote-port-forward-ui"
+  ],
+  "activationEvents": [
+    "onCommand:_remotePortForward.prepare",
+    "onCommand:_remotePortForward.release"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    },
+    "virtualWorkspaces": false
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/00INDEX/RemotePortForward.git",
+    "directory": "packages/remote"
+  },
+  "homepage": "https://github.com/00INDEX/RemotePortForward#readme",
+  "bugs": {
+    "url": "https://github.com/00INDEX/RemotePortForward/issues"
+  }
+}

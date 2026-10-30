@@ -1,0 +1,46 @@
+{
+  "name": "remote-port-forward-workspace",
+  "version": "0.1.0",
+  "type": "module",
+  "workspaces": [
+    "packages/local",
+    "packages/remote"
+  ],
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "compile": "npm run check-types && node scripts/build.mjs",
+    "build": "node scripts/build.mjs --production",
+    "watch": "node scripts/build.mjs --watch",
+    "check-types": "tsc --noEmit && tsc -p tsconfig.webview.json --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "check": "npm run check-types && npm run lint",
+    "package": "npm run check && npm run build && node scripts/package.mjs",
+    "package:registry": "npm run check && npm run build && node scripts/package.mjs --registry"
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "@types/node": "^20.19.43",
+    "@types/vscode": "~1.95.0",
+    "@types/ws": "^8.18.2",
+    "@vscode/vsce": "^4.1.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.13.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/00INDEX/RemotePortForward.git"
+  },
+  "homepage": "https://github.com/00INDEX/RemotePortForward#readme",
+  "bugs": {
+    "url": "https://github.com/00INDEX/RemotePortForward/issues"
+  }
+}
