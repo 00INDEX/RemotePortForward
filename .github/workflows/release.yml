@@ -34,6 +34,11 @@ concurrency:
 
 jobs:
   release:
+    name: Release (${{ matrix.registry }})
+    strategy:
+      fail-fast: false
+      matrix:
+        registry: ${{ fromJSON(inputs.registry == 'openvsx' && '["openvsx"]' || inputs.registry == 'marketplace' && '["marketplace"]' || '["openvsx","marketplace"]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     environment: publish
@@ -41,6 +46,7 @@ jobs:
       contents: read
       id-token: write
     env:
+      REGISTRY: ${{ matrix.registry }}
       RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
       PUBLISH_RELEASE: ${{ github.event_name == 'push' || inputs.publish }}
     steps:
@@ -77,11 +83,10 @@ jobs:
       - name: Check and package
         run: npm run package:registry -- --publisher 00index
       - name: Verify release packages
-        run: node scripts/publish.mjs --check --preflight
+        run: node scripts/publish.mjs --check --preflight --registry "$REGISTRY"
       - name: Publish and verify registry downloads
         if: github.event_name == 'push' || inputs.publish == true
         env:
-          REGISTRY: ${{ inputs.registry || 'all' }}
           OVSX_PAT: ${{ secrets.OVSX_PAT }}
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
         run: node scripts/publish.mjs --registry "$REGISTRY"
